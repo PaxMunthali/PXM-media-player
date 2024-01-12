@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Player</title>
+    <link rel="stylesheet" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script src="bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+    
+
+    <style>
+        .container{
+            height: 500px;
+            width: 1000px;
+        }
+        .myTools{
+            margin-right: auto;
+            margin-left: auto;
+        }
+        .myTools ul{
+            margin-top: 20px;
+            
+            /* margin: auto; */
+        }
+        .myTools ul li{
+            display: inline;
+            
+        }
+        .myTools ul li a{
+            cursor: pointer; 
+            margin-right: 50px;       
+            
+        }
+        .myTools ul li a img{         
+            width: 50px;
+            height: 50px;
+            background-color: rgb(143, 134, 134);
+            background-size:cover;
+            border-radius: 20%;
+           
+        }
+        .progress{
+            height: 5px;
+            cursor: pointer;
+        }      
+        .playList{
+            
+            height: 270px;
+            background-color: #000;
+            margin-bottom: 30px;
+        }  
+        .playList .col-md-4{
+            background-color: aliceblue;
+            margin-left: auto;
+            margin-right: auto;
+            color: aliceblue;
+        }
+        
+        .table{   
+           
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 13px;
+            color: rgb(213, 217, 218);
+        }
+        th, td{
+            border: 1px solid grey;
+            text-align: left;
+            
+
+        }
+        tr:nth-child(even){
+            background-color: rgb(92, 93, 94);
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid p-5 my-5 bg-dark text-white ">
+        <h1>PXM Media Player</h1>
+        <div class="playList col-md-12">
+            <table class="table table-responsive">
+              <thead>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Time</th>
+                    <th>Length</th>
+                    <th>Artist</th>
+                    <th>Status</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td><p>msns</p></td>
+                        <td><p>msns</p></td>
+                        <td><p>msns</p></td>
+                        <td><p>msns</p></td>
+                        <td><p>msns</p></td>  
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><p>msns</p></td>
+                        <td><p>msns</p></td>
+                        <td><p>msns</p></td>
+                        <td><p>msns</p></td>
+                        <td><p>msns</p></td>   
+                    </tr>
+            </tbody>
+            </table>
+           
+        </div>
+      
+        <div class="progress">
+            <div class="progress-bar bg-success progress-bar-striped" style="width:30%"></div>
+        </div>
+
+        <div class="myTools col-md-11">
+            <ul class="">
+                <li><a><img src="imgs/prev.png" alt=""></a> </li>
+                <li><a><img src="imgs/stop.png" alt=""></a> </li>
+                <li><a><img src="imgs/play.png" alt=""></a>  </li>
+                <li><a><img src="imgs/next.png" alt=""></a> </li>
+            </ul>
+        </div>
+        
+    </div>
+</body>
+</html>
