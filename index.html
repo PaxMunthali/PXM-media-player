@@ -70,40 +70,30 @@
             background-color: #000;
             margin-bottom: 30px;
         }  
-        
+        .append{
+            float: right;
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 <body>
     <div class="container-fluid p-5 my-5 bg-dark text-white ">
         <h1>PXM Media Player</h1>
+        <div class="append ">
+            <button class="btn btn-success" onclick="openFileExplorer()">Append song</button>
+            <input type="file" name="" id="fileInput" nultiple accept="audio/*" style="display:none;" onchange="addToPlaylist()">
+        </div>
         <div class="playList col-md-12">
-            <table class="table table-responsive table-hover">
+            <table class="table table-responsive table-hover" >
               <thead>
                     <th></th>
                     <th>Name</th>
-                    <th>Time</th>
-                    <th>Length</th>
-                    <th>Artist</th>
-                    <th>Status</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th></th>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td><a>msns</a></td>
-                        <td><a>msns</a></td>
-                        <td><a>msns</a></td>
-                        <td><a>msns</a></td>
-                        <td><a>msns</a></td>                      
-                        
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><a>msns</a></td>
-                        <td><a>msns</a></td>
-                        <td><a>msns</a></td>
-                        <td><a>msns</a></td>
-                        <td><a>msns</a></td>    
-                    </tr>
+                <tbody id="table1">
+                                        
             </tbody>
             </table>
            
@@ -114,7 +104,7 @@
         </div>
 
         <div class="myTools col-md-11">
-            <ul class="">
+            <ul class="Playlist">
                 <li><a><img src="imgs/prev.png" alt=""></a> </li>
                 <li><a><img src="imgs/stop.png" alt=""></a> </li>
                 <li><a><img src="imgs/play.png" alt=""></a>  </li>
@@ -124,4 +114,42 @@
         
     </div>
 </body>
+
+<script>
+    function openFileExplorer(){
+        var fileInput = document.getElementById('fileInput');
+        fileInput.click();
+    }
+
+    function addToPlaylist(){
+        var fileInput = document.getElementById("fileInput");
+        var playlist = document.getElementById('table1');
+
+        var files = fileInput.files;
+
+        for(var i = 0; i < files.length; i++){
+            // var listItem = document.createElement('tr');
+            // listItem.textContent = files[i].name;
+           
+            // playlist.appendChild(listItem);
+
+            var newRow = playlist.insertRow();
+            
+            var filespaceCell = newRow.insertCell(0);
+            filespaceCell.textContent = " ";
+
+            var fileNameCell = newRow.insertCell(1);
+            fileNameCell.textContent = files[i].name;
+
+            var fileLengthCell = newRow.insertCell(2);
+            fileLengthCell.textContent = files[i].type;
+
+            var fileSizeCell = newRow.insertCell(3);
+            fileSizeCell.textContent = files[i].size;
+
+            var filespaceCell = newRow.insertCell(4);
+            filespaceCell.textContent = " ";
+        }
+    }
+</script>
 </html>
