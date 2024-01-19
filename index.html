@@ -69,10 +69,17 @@
             height: 270px;
             background-color: #000;
             margin-bottom: 30px;
+            overflow-y: scroll;
         }  
         .append{
             float: right;
             margin-bottom: 5px;
+        }
+        table thead{
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            background-color: black;
         }
     </style>
 </head>
@@ -81,7 +88,7 @@
         <h1>PXM Media Player</h1>
         <div class="append ">
             <button class="btn btn-success" onclick="openFileExplorer()">Append song</button>
-            <input type="file" name="" id="fileInput" nultiple accept="audio/*" style="display:none;" onchange="addToPlaylist()">
+           
         </div>
         <div class="playList col-md-12">
             <table class="table table-responsive table-hover" >
@@ -98,7 +105,11 @@
             </table>
            
         </div>
+
+        <input type="file" id="fileInput" multiple accept="audio/*" style="display:none;" onchange="addToPlaylist()">
       
+        <audio id="audioPlayer" ></audio>
+
         <div class="progress">
             <div class="progress-bar bg-success progress-bar-striped" style="width:30%"></div>
         </div>
@@ -106,7 +117,7 @@
         <div class="myTools col-md-11">
             <ul class="Playlist">
                 <li><a><img src="imgs/prev.png" alt=""></a> </li>
-                <li><a><img src="imgs/stop.png" alt=""></a> </li>
+                <li><a onclick="stopSong()"><img src="imgs/stop.png" alt=""></a> </li>
                 <li><a><img src="imgs/play.png" alt=""></a>  </li>
                 <li><a><img src="imgs/next.png" alt=""></a> </li>
             </ul>
@@ -116,6 +127,8 @@
 </body>
 
 <script>
+    var currentAudio;
+
     function openFileExplorer(){
         var fileInput = document.getElementById('fileInput');
         fileInput.click();
@@ -124,6 +137,7 @@
     function addToPlaylist(){
         var fileInput = document.getElementById("fileInput");
         var playlist = document.getElementById('table1');
+        var audioPlayer = document.getElementById('audioPlayer');
 
         var files = fileInput.files;
 
@@ -145,11 +159,49 @@
             fileLengthCell.textContent = files[i].type;
 
             var fileSizeCell = newRow.insertCell(3);
-            fileSizeCell.textContent = files[i].size;
+            fileSizeCell.textContent = files[i].size + "bytes";
 
             var filespaceCell = newRow.insertCell(4);
             filespaceCell.textContent = " ";
+
+            newRow.onclick = function(){
+                audioPlayer = null;
+                playSong(this);
+            };
+            
+        }
+
+    }
+
+    function playSong(row){
+
+        if(currentAudio){
+            currentAudio.pause();
+        }
+
+        // var audioPlayer = document.getElementById("audioPlayer");
+        var filename = row.cells[1].textContent;
+        
+        var fileURL = URL.createObjectURL(fileInput.files[0]);
+
+        audioPlayer.src = fileURL;
+        audioPlayer.play();
+        
+        currentAudio = audioPlayer;
+    }
+
+    function pauseSong(){
+        if(!audioPlayer.paused){
+            audioPlayer.pause();
         }
     }
+
+    function stopSong(){
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        audioPlayer.src = '';
+        currentAudio= null;
+    }
+
 </script>
 </html>
