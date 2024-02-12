@@ -118,7 +118,7 @@
             <ul class="Playlist">
                 <li><a><img src="imgs/prev.png" alt=""></a> </li>
                 <li><a onclick="stopSong()"><img src="imgs/stop.png" alt=""></a> </li>
-                <li><a><img src="imgs/play.png" alt=""></a>  </li>
+                <li><a onclick="pauseSong()"><img src="imgs/play.png" alt=""></a>  </li>
                 <li><a><img src="imgs/next.png" alt=""></a> </li>
             </ul>
         </div>
@@ -127,7 +127,7 @@
 </body>
 
 <script>
-    var currentAudio;
+    var currentAudio = document.getElementById('audioPlayer');
 
     function openFileExplorer(){
         var fileInput = document.getElementById('fileInput');
@@ -137,16 +137,11 @@
     function addToPlaylist(){
         var fileInput = document.getElementById("fileInput");
         var playlist = document.getElementById('table1');
-        var audioPlayer = document.getElementById('audioPlayer');
-
+        
         var files = fileInput.files;
 
         for(var i = 0; i < files.length; i++){
-            // var listItem = document.createElement('tr');
-            // listItem.textContent = files[i].name;
-           
-            // playlist.appendChild(listItem);
-
+            
             var newRow = playlist.insertRow();
             
             var filespaceCell = newRow.insertCell(0);
@@ -165,7 +160,6 @@
             filespaceCell.textContent = " ";
 
             newRow.onclick = function(){
-                audioPlayer = null;
                 playSong(this);
             };
             
@@ -182,25 +176,25 @@
         // var audioPlayer = document.getElementById("audioPlayer");
         var filename = row.cells[1].textContent;
         
-        var fileURL = URL.createObjectURL(fileInput.files[0]);
+        var fileURL = URL.createObjectURL(fileInput.files[row.rowIndex - 1]);
 
-        audioPlayer.src = fileURL;
-        audioPlayer.play();
-        
-        currentAudio = audioPlayer;
+        currentAudio.src = fileURL;
+        // audioPlayer.play();
+        currentAudio.play();
     }
 
     function pauseSong(){
-        if(!audioPlayer.paused){
-            audioPlayer.pause();
+        if(currentAudio.paused){
+            currentAudio.play();
+        }else{
+            currentAudio.pause();
         }
     }
 
     function stopSong(){
-        audioPlayer.pause();
-        audioPlayer.currentTime = 0;
-        audioPlayer.src = '';
-        currentAudio= null;
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+        currentAudio.src = '';
     }
 
 </script>
